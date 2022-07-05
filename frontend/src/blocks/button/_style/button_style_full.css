@@ -1,0 +1,7 @@
+.button_style_full {
+  width: 21px;
+  height: 19px;
+  align-self: center;
+  padding-left: 26px;
+  background: url(../../../images/style_full.svg) no-repeat center;
+}

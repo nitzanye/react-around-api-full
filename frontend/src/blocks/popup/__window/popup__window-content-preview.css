@@ -1,0 +1,7 @@
+.popup__window-content-preview {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  width: fit-content;
+}

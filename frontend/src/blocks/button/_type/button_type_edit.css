@@ -1,0 +1,25 @@
+.button_type_edit {
+  border: 1px white solid;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  background: url(../../../images/info.svg) no-repeat center;
+  background-size: 10px 10px;
+
+  
+}
+
+.button_type_edit:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 320px) {
+  .button_type_edit {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+  }
+}

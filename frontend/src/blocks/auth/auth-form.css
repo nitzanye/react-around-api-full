@@ -1,0 +1,7 @@
+.auth-form {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+    align-items: center;
+}

@@ -1,0 +1,6 @@
+.header__hamburger-menu_visible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}

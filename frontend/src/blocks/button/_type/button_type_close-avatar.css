@@ -1,0 +1,8 @@
+.button_type_close-avatar {
+    top: -15%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+}

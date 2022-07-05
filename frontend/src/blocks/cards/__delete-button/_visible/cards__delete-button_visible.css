@@ -1,0 +1,19 @@
+.cards__delete-button_visible {
+  width: 18px;
+  height: 19.3px;
+  align-self: center;
+  background: url(../../../../images/delete.svg) no-repeat center;
+  position: absolute;
+  margin-top: 18px;
+  margin-left: 249px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.cards__delete-button_visible:hover {
+  opacity: 0.6;
+}
+
+.cards__delete-button_visible:focus-visible {
+  outline: none;
+}

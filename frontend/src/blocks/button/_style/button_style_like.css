@@ -1,0 +1,11 @@
+.button_style_like {
+  width: 21px;
+  height: 19px;
+  align-self: center;
+  padding-left: 26px;
+  background: url(../../../images/like.svg) no-repeat center;
+}
+
+.button_style_like:hover {
+  opacity: 0.5;
+}

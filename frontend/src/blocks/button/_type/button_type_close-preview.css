@@ -1,0 +1,13 @@
+.button_type_close-preview {
+  top: -40px;
+  right: -40px;
+}
+
+@media screen and (max-width: 768px) {
+  .button_type_close-preview {
+    right: -30px;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+  }
+}

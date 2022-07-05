@@ -1,0 +1,16 @@
+.header__hamburger-link {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.header__hamburger-link:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
