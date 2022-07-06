@@ -14,7 +14,11 @@ const helmet = require("helmet");
 
 const bodyParser = require("body-parser");
 
+let cors = require("cors");
+
 app.use(bodyParser.json());
+
+require("dotenv").config();
 
 const { PORT = 3000 } = process.env;
 
@@ -42,15 +46,20 @@ const { errors } = require("celebrate");
 
 app.use(helmet());
 
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: '6291ee6e8a309062867b0274',
-//   };
-//   next();
-// });
+app.use(cors());
+
+//enable requests for all routes
+app.options("*", cors());
 
 // must come before the route handlers
 app.use(requestLogger);
+
+// server crash testing
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Server will crash now");
+  }, 0);
+});
 
 // register and login
 app.post("/signup", validateAuthRequest, validateUser, createUser);
@@ -71,11 +80,7 @@ app.use(errors());
 // centralized error handler
 app.use(serverErrorHandler);
 
-app.get("*", pageNotFound);
-
-// app.get("*", (req, res) => {
-//   res.status(404).send({ message: "Requested resource not found" });
-// });
+app.use("*", pageNotFound);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

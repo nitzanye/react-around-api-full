@@ -21,7 +21,7 @@ class Api {
 
   updateUserInfo = (data) => {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data),
     }).then(this._checkResStatus);
@@ -29,7 +29,7 @@ class Api {
 
   updateUserAvatar = (newAvatarLink) => {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: newAvatarLink,
@@ -39,7 +39,7 @@ class Api {
 
   addNewCard = (cardName, cardLink) => {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         name: cardName,
@@ -50,13 +50,13 @@ class Api {
 
   deleteCard = (cardId) => {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._checkResStatus);
   };
 
   changeLikeCardStatus = (cardId, isLiked) => {
-    const method = isLiked ? "DELETE" : "PUT";
+    const method = isLiked ? 'DELETE' : 'PUT';
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method,
       headers: this._headers,
@@ -64,10 +64,15 @@ class Api {
   };
 }
 
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.around-nitzan.students.nomoredomainssbs.ru/'
+    : 'http://localhost:3000';
+
 export default new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  baseUrl: BASE_URL,
   headers: {
-    authorization: "a68c011d-d292-456c-86c3-53eebc4a76ba",
-    "Content-Type": "application/json",
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    'Content-Type': 'application/json',
   },
 });
