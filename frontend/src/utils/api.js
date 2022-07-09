@@ -90,6 +90,7 @@ const BASE_URL =
 
 export default new Api({
   baseUrl: BASE_URL,
+
 });
 
 // class Api {

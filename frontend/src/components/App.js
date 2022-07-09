@@ -59,7 +59,7 @@ const App = () => {
   }, [loggedIn]);
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    const isLiked = card.likes.some((user) => user === currentUser._id);
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -78,7 +78,7 @@ const App = () => {
       auth
         .checkUserToken(token)
         .then((res) => {
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
           setLoggedIn(true);
           navigate('/');
         })
@@ -218,7 +218,7 @@ const App = () => {
     auth
       .authorize(email, password)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.token) {
           localStorage.setItem('token', data.token);
           setLoggedIn(true);

@@ -9,8 +9,7 @@ const UnauthorizedError = require("../errors/unauthorized-error");
 const auth = (req, res, next) => {
   // getting authorization from the header
   const { authorization } = req.headers;
-
-  if (!authorization || !authorization.startWith("Bearer ")) {
+  if (!authorization || !authorization.startsWith("Bearer ")) {
     return next(new UnauthorizedError("You are not authorized"));
   }
 

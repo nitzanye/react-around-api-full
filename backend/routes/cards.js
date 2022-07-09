@@ -22,10 +22,10 @@ router.post("/cards", authValidation, newCardValidation, createCard);
 
 router.delete("/cards/:cardId", authValidation, cardValidationId, deleteCard);
 
-router.put("/cards/:cardId/likes", authValidation, cardValidationId, likeCard);
+router.put("/cards/likes/:cardId", authValidation, cardValidationId, likeCard);
 
 router.delete(
-  "/cards/:cardId/likes",
+  "/cards/likes/:cardId",
   authValidation,
   cardValidationId,
   dislikeCard

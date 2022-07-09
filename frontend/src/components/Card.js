@@ -5,7 +5,7 @@ function Card({ card, onCardClick, onCardLike, onCardDeleteClick }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   // Check if the card was liked by the current user
-  const isLiked = card.likes.some((user) => user._id === currentUser._id);
+  const isLiked = card.likes.some((user) => user === currentUser._id);
 
   // Create a variable which you then set in `className` for the like button
   const cardLikeButtonClassName = `button_style_like ${
@@ -13,7 +13,7 @@ function Card({ card, onCardClick, onCardLike, onCardDeleteClick }) {
   }`;
 
   // Checking if the current user is the owner of the current card
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   // Creating a variable which you'll then set in `className` for the delete button
   const cardDeleteButtonClassName = `cards__delete-button ${
