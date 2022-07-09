@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // const urlValidator = require("../utils/urlValidator");
 
-const { validateURL, validateEmail } = require("../middlewares/validations");
+// const { validateUrl, validateEmail } = require("../middlewares/validations");
 
 const bcrypt = require("bcryptjs");
 
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     // validate: {
-    //   validator: validateURL,
+    //   validator: validateUrl,
     //   message: "Invalid URL",
     // },
     default: "https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg",

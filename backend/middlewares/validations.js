@@ -22,6 +22,20 @@ function validateEmail(string) {
   return string;
 }
 
+// const validateUrl = (value, helpers) => {
+//   if (validator.isURL(value)) {
+//     return value;
+//   }
+//   return helpers.message("Invalid link");
+// };
+
+// const validateEmail = (value, helpers) => {
+//   if (validator.isEmail(value)) {
+//     return value;
+//   }
+//   return helpers.message("Invalid email");
+// };
+
 const authValidation = celebrate({
   headers: Joi.object()
     .keys({
@@ -110,17 +124,3 @@ module.exports = {
 //     userId: Joi.string().required().custom(validateObjectId),
 //   }),
 // });
-
-// const validateURL = (value, helpers) => {
-//   if (validator.isURL(value)) {
-//     return value;
-//   }
-//   return helpers.message("Invalid link");
-// };
-
-// const validateEmail = (value, helpers) => {
-//   if (validator.isEmail(value)) {
-//     return value;
-//   }
-//   return helpers.message("Invalid email");
-// };

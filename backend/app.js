@@ -23,7 +23,7 @@ const { pageNotFound } = require("./controllers/page-not-found");
 const auth = require("./middlewares/auth");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 const {
-  authValidation,
+  // authValidation,
   validateUser,
   validateLogin,
 } = require("./middlewares/validations");

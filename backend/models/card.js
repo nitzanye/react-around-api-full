@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+// const { validateUrl } = require("../middlewares/validations");
 
 // const urlValidator = require('../utils/urlValidator');
 
-// const { validateURL } = require("../middlewares/validations");
+// const { validateUrl } = require("../middlewares/validations");
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -15,7 +16,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     // validate: {
-    //   validator: validateURL,
+    //   validator: validateUrl,
     //   message: "Invalid URL",
     // },
   },
