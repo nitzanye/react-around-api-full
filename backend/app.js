@@ -51,8 +51,8 @@ app.get("/crash-test", () => {
 });
 
 // register and login
-app.post("/signup", authValidation, validateUser, createUser);
-app.post("/signin", authValidation, validateLogin, login);
+app.post("/signup", validateUser, createUser);
+app.post("/signin", validateLogin, login);
 
 // authorization
 app.use(auth);
