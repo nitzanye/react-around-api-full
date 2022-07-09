@@ -1,37 +1,29 @@
 const express = require("express");
-
 const app = express();
 
 const mongoose = require("mongoose");
-
 mongoose.connect("mongodb://localhost:27017/aroundb", {
   useNewUrlParser: true,
 });
 
-// app.use(express.json());
-
 const helmet = require("helmet");
-
 const bodyParser = require("body-parser");
-
 let cors = require("cors");
 
+// app.use(express.json());
 app.use(bodyParser.json());
 
 require("dotenv").config();
+// console.log(process.env);
 
 const { PORT = 3000 } = process.env;
 
 const { createUser, login } = require("./controllers/users");
-
 const { pageNotFound } = require("./controllers/page-not-found");
-
 const auth = require("./middlewares/auth");
-
 const { requestLogger, errorLogger } = require("./middlewares/logger");
-
 const {
-  validateAuthRequest,
+  authValidation,
   validateUser,
   validateLogin,
 } = require("./middlewares/validations");
@@ -39,17 +31,14 @@ const {
 const serverErrorHandler = require("./middlewares/server-error-handler");
 
 const userRouter = require("./routes/users");
-
 const cardsRouter = require("./routes/cards");
-
 const { errors } = require("celebrate");
+// const { application } = require("express");
 
 app.use(helmet());
-
 app.use(cors());
-
-//enable requests for all routes
 app.options("*", cors());
+//enable requests for all routes
 
 // must come before the route handlers
 app.use(requestLogger);
@@ -62,8 +51,8 @@ app.get("/crash-test", () => {
 });
 
 // register and login
-app.post("/signup", validateAuthRequest, validateUser, createUser);
-app.post("/signin", validateAuthRequest, validateLogin, login);
+app.post("/signup", authValidation, validateUser, createUser);
+app.post("/signin", authValidation, validateLogin, login);
 
 // authorization
 app.use(auth);

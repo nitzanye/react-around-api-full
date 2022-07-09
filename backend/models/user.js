@@ -23,20 +23,20 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    validate: {
-      validator: validateURL,
-      message: "Invalid URL",
-    },
+    // validate: {
+    //   validator: validateURL,
+    //   message: "Invalid URL",
+    // },
     default: "https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg",
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: validateEmail,
-      message: "Invalid Email",
-    },
+    // validate: {
+    //   validator: validateEmail,
+    //   message: "Invalid Email",
+    // },
   },
   password: {
     type: String,
@@ -53,13 +53,17 @@ userSchema.statics.findUserByCrendentials = function findUserByCrendentials(
     .select("+password")
     .then((user) => {
       if (!user) {
-        return Promise.reject(new UnauthorizedError("Incorrent data"));
+        return Promise.reject(
+          new UnauthorizedError("Incorrent Email or Password")
+        );
       }
       // user found
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
           // the hashes didn't match, rejecting the promise
-          return Promise.reject(new UnauthorizedError("Incorect data"));
+          return Promise.reject(
+            new UnauthorizedError("Incorect Email or Password")
+          );
         }
         return user;
       });

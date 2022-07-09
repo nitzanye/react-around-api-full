@@ -9,6 +9,7 @@ const ConflictError = require("../errors/conflict-error");
 const { NODE_ENV, JWT_SECRET } = process.env;
 const SALT_ROUNDS = 10;
 
+// or just users in the res
 const getUsers = (req, res, next) => {
   User.find({})
     .orFail(new NotFoundError("Data is not found"))
@@ -22,9 +23,9 @@ const getUserById = (req, res, next) => {
     .then((user) => res.status(SUCCESS_OK).send(user))
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new InvalidDataError("Invalid data"));
+        return next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };
@@ -38,7 +39,7 @@ const getCurrentUserData = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
-
+  // console.log("it's me");
   User.findOne({ email })
     .then((user) => {
       if (user) {
@@ -83,10 +84,11 @@ const login = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  const currentUser = req.user._id;
+  // const currentUser = req.user._id;
   const { name, about } = req.body;
   User.findByIdAndUpdate(
-    { _id: currentUser },
+    // { _id: currentUser },
+    req.user._id,
     { name, about },
     { new: true, runValidators: true }
   )
@@ -98,16 +100,17 @@ const updateUser = (req, res, next) => {
       } else if (err.name === "CastError") {
         next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };
 
 const updateUserAvatar = (req, res, next) => {
-  const currentUser = req.user._id;
+  // const currentUser = req.user._id;
   const { avatar } = req.body;
   User.findByIdAndUpdate(
-    { _id: currentUser },
+    // { _id: currentUser },
+    req.user._id,
     { avatar },
     { new: true, runValidators: true }
   )
@@ -119,7 +122,7 @@ const updateUserAvatar = (req, res, next) => {
       } else if (err.name === "CastError") {
         next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };

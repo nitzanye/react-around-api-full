@@ -4,6 +4,7 @@ const NotFoundError = require("../errors/not-found-error");
 const InvalidDataError = require("../errors/invalid-data-error");
 
 const getCards = (req, res, next) => {
+  console.log(res);
   Card.find({})
     .orFail(new NotFoundError("Data is not found"))
     .then((cards) => res.status(SUCCESS_OK).send(cards))
@@ -12,14 +13,16 @@ const getCards = (req, res, next) => {
 
 const createCard = (req, res, next) => {
   // console.log(req.user._id);
-  // const { name, link, owener } = req.body;
-  Card.create(req.body)
+  const { name, link } = req.body;
+  // const owner = req.user._id;
+
+  Card.create({ name, link, owner: req.user._id })
     .then((newCard) => res.status(SUCCESS_OK).send(newCard))
     .catch((err) => {
       if (err.name === "ValidationError") {
-        next(new InvalidDataError("Invalid data"));
+        return next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };
@@ -30,9 +33,9 @@ const deleteCard = (req, res, next) => {
     .then((card) => res.status(SUCCESS_OK).send(card))
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new InvalidDataError("Invalid data"));
+        return next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };
@@ -47,9 +50,9 @@ const likeCard = (req, res, next) => {
     .then((card) => res.status(SUCCESS_OK).send(card))
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new InvalidDataError("Invalid data"));
+        return next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };
@@ -64,9 +67,9 @@ const dislikeCard = (req, res, next) => {
     .then((card) => res.status(SUCCESS_OK).send(card))
     .catch((err) => {
       if (err.name === "CastError") {
-        next(new InvalidDataError("Invalid data"));
+        return next(new InvalidDataError("Invalid data"));
       } else {
-        next(err);
+        return next(err);
       }
     });
 };

@@ -2,27 +2,27 @@ const mongoose = require("mongoose");
 
 // const urlValidator = require('../utils/urlValidator');
 
-const { validateURL } = require("../middlewares/validations");
+// const { validateURL } = require("../middlewares/validations");
 
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     minlength: 2,
     maxlength: 30,
+    required: true,
   },
   link: {
     type: String,
     required: true,
-    validate: {
-      validator: validateURL,
-      message: "Invalid URL",
-    },
+    // validate: {
+    //   validator: validateURL,
+    //   message: "Invalid URL",
+    // },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
-    // required: true,
+    required: true,
   },
   likes: [
     {
@@ -33,7 +33,7 @@ const cardSchema = new mongoose.Schema({
   ],
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 });
 

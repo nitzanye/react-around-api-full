@@ -71,10 +71,10 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
+    const token = localStorage.getItem('token');
+    if (token) {
       auth
-        .checkUserToken(jwt)
+        .checkUserToken(token)
         .then((res) => {
           setUserEmail(res.data.email);
           setLoggedIn(true);
@@ -186,14 +186,14 @@ const App = () => {
     };
   }, []);
 
-  const handleUserRegister = (password, email) => {
+  const handleUserRegister = (email, password) => {
     setIsDataLoading(true);
 
     if (!email || !password) {
       return;
     }
     auth
-      .register(password, email)
+      .register(email, password)
       .then(() => {
         setIsSuccess(true);
         navigate('/signin');
@@ -208,16 +208,17 @@ const App = () => {
       });
   };
 
-  const handleUserLogin = (password, email) => {
+  const handleUserLogin = (email, password) => {
     setIsDataLoading(true);
     if (!email || !password) {
       return;
     }
     auth
-      .authorize(password, email)
+      .authorize(email, password)
       .then((data) => {
+        console.log(data);
         if (data.token) {
-          localStorage.setItem('jwt', data.token);
+          localStorage.setItem('token', data.token);
           setLoggedIn(true);
           setUserEmail(email);
           navigate('/');
