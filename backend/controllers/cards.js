@@ -4,15 +4,29 @@ const NotFoundError = require("../errors/not-found-error");
 const InvalidDataError = require("../errors/invalid-data-error");
 
 const getCards = (req, res, next) => {
-  console.log(res);
   Card.find({})
     .orFail(new NotFoundError("Data is not found"))
     .then((cards) => res.status(SUCCESS_OK).send(cards))
     .catch(next);
 };
 
+// const createCard = (req, res, next) => {
+
+//   const { name, link } = req.body;
+//   // const owner = req.user._id;
+
+//   Card.create({ name, link, owner: req.user._id })
+//     .then((newCard) => res.status(SUCCESS_OK).send(newCard))
+//     .catch((err) => {
+//       if (err.name === "ValidationError") {
+//         return next(new InvalidDataError("Invalid data"));
+//       } else {
+//         return next(err);
+//       }
+//     });
+// };
+
 const createCard = (req, res, next) => {
-  // console.log(req.user._id);
   const { name, link } = req.body;
   // const owner = req.user._id;
 

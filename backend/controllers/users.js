@@ -37,68 +37,66 @@ const getCurrentUserData = (req, res, next) => {
     .catch(next);
 };
 
-const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
-  // console.log("it's me");
-  bcrypt
-    .hash(password, SALT_ROUNDS)
-    .then((hash) =>
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      })
-    )
-    .then((user) =>
-      res.status(SUCCESS_OK).send({
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-      })
-    )
-    .catch((err) => {
-      if (err.name === "ValidationError") {
-        next(new InvalidDataError("Invalid data"));
-      } else if (err.code === 11000) {
-        next(new ConflictError("This email is already exist"));
-      } else next(err);
-    });
-};
-
 // const createUser = (req, res, next) => {
 //   const { name, about, avatar, email, password } = req.body;
-//   // console.log("it's me");
-//   User.findOne({ email })
-//     .then((user) => {
-//       if (user) {
-//         throw new ConflictError("This email is already exist");
-//       } else {
-//         return bcrypt.hash(password, SALT_ROUNDS);
-//       }
-//     })
-//     .then((hash) => {
-//       User.create({ name, about, avatar, email, password: hash })
-//         .then((user) => {
-//           res.status(SUCCESS_OK).send({
-//             _id: user._id,
-//             name: user.name,
-//             about: user.about,
-//             avatar: user.avatar,
-//             email: user.email,
-//           });
-//         })
-//         .catch((err) => {
-//           if (err.name === "ValidationError") {
-//             next(new InvalidDataError("Invalid data"));
-//           }
-//         });
-//     })
-//     .catch(next);
+//   bcrypt
+//     .hash(password, SALT_ROUNDS)
+//     .then((hash) =>
+//       User.create({
+//         name,
+//         about,
+//         avatar,
+//         email,
+//         password: hash,
+//       })
+//     )
+//     .then((user) =>
+//       res.status(SUCCESS_OK).send({
+//         _id: user._id,
+//         email: user.email,
+//         name: user.name,
+//         about: user.about,
+//         avatar: user.avatar,
+//       })
+//     )
+//     .catch((err) => {
+//       if (err.name === "ValidationError") {
+//         next(new InvalidDataError("Invalid data"));
+//       } else if (err.code === 11000) {
+//         next(new ConflictError("This email is already exist"));
+//       } else next(err);
+//     });
 // };
+
+const createUser = (req, res, next) => {
+  const { name, about, avatar, email, password } = req.body;
+  User.findOne({ email })
+    .then((user) => {
+      if (user) {
+        throw new ConflictError("This email is already exist");
+      } else {
+        return bcrypt.hash(password, SALT_ROUNDS);
+      }
+    })
+    .then((hash) => {
+      User.create({ name, about, avatar, email, password: hash })
+        .then((user) => {
+          res.status(SUCCESS_OK).send({
+            _id: user._id,
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+            email: user.email,
+          });
+        })
+        .catch((err) => {
+          if (err.name === "ValidationError") {
+            next(new InvalidDataError("Invalid data"));
+          }
+        });
+    })
+    .catch(next);
+};
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
