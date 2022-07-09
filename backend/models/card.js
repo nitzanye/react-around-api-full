@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 
 // const urlValidator = require('../utils/urlValidator');
 
-// const { validateUrl } = require("../middlewares/validations");
-
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,

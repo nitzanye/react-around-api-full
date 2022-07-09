@@ -33,7 +33,6 @@ const serverErrorHandler = require("./middlewares/server-error-handler");
 const userRouter = require("./routes/users");
 const cardsRouter = require("./routes/cards");
 const { errors } = require("celebrate");
-// const { application } = require("express");
 
 app.use(helmet());
 app.use(cors());

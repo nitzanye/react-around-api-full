@@ -9,7 +9,6 @@ const ConflictError = require("../errors/conflict-error");
 const { NODE_ENV, JWT_SECRET } = process.env;
 const SALT_ROUNDS = 10;
 
-// or just users in the res
 const getUsers = (req, res, next) => {
   User.find({})
     .orFail(new NotFoundError("Data is not found"))
@@ -36,37 +35,6 @@ const getCurrentUserData = (req, res, next) => {
     .then((user) => res.status(SUCCESS_OK).send(user))
     .catch(next);
 };
-
-// const createUser = (req, res, next) => {
-//   const { name, about, avatar, email, password } = req.body;
-//   bcrypt
-//     .hash(password, SALT_ROUNDS)
-//     .then((hash) =>
-//       User.create({
-//         name,
-//         about,
-//         avatar,
-//         email,
-//         password: hash,
-//       })
-//     )
-//     .then((user) =>
-//       res.status(SUCCESS_OK).send({
-//         _id: user._id,
-//         email: user.email,
-//         name: user.name,
-//         about: user.about,
-//         avatar: user.avatar,
-//       })
-//     )
-//     .catch((err) => {
-//       if (err.name === "ValidationError") {
-//         next(new InvalidDataError("Invalid data"));
-//       } else if (err.code === 11000) {
-//         next(new ConflictError("This email is already exist"));
-//       } else next(err);
-//     });
-// };
 
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;

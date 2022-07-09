@@ -22,20 +22,6 @@ function validateEmail(string) {
   return string;
 }
 
-// const validateUrl = (value, helpers) => {
-//   if (validator.isURL(value)) {
-//     return value;
-//   }
-//   return helpers.message("Invalid link");
-// };
-
-// const validateEmail = (value, helpers) => {
-//   if (validator.isEmail(value)) {
-//     return value;
-//   }
-//   return helpers.message("Invalid email");
-// };
-
 const authValidation = celebrate({
   headers: Joi.object()
     .keys({
@@ -46,9 +32,6 @@ const authValidation = celebrate({
 
 const validateUser = celebrate({
   body: Joi.object().keys({
-    // name: Joi.string().min(2).max(30),
-    // about: Joi.string().min(2).max(30),
-    // avatar: Joi.string().custom(validateUrl),
     email: Joi.string().required().custom(validateEmail),
     password: Joi.string().required(),
   }),
@@ -105,22 +88,3 @@ module.exports = {
   newCardValidation,
   cardValidationId,
 };
-
-// const validateObjectId = (value, helpers) => {
-//   if (ObjectId.isValid(value)) {
-//     return value;
-//   }
-//   return helpers.message("Invalid User ID");
-// };
-
-// const cardValidationId = celebrate({
-//   params: Joi.object().keys({
-//     cardId: Joi.string().required().custom(validateObjectId),
-//   }),
-// });
-
-// const validateUserdId = celebrate({
-//   params: Joi.object().keys({
-//     userId: Joi.string().required().custom(validateObjectId),
-//   }),
-// });
