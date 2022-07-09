@@ -26,7 +26,7 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(password, email);
+    onSubmit(email, password);
   };
 
   return (
