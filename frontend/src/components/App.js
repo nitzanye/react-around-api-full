@@ -43,18 +43,20 @@ const App = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    api
-      .getUserData()
-      .then((res) => setCurrentUser(res))
-      .catch((err) => console.log(`Error.....: ${err}`));
-  }, []);
+    loggedIn &&
+      api
+        .getUserData()
+        .then((res) => setCurrentUser(res))
+        .catch((err) => console.log(`Error.....: ${err}`));
+  }, [loggedIn]);
 
   React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then(setCards)
-      .catch((err) => console.log(`Error.....: ${err}`));
-  }, []);
+    loggedIn &&
+      api
+        .getInitialCards()
+        .then(setCards)
+        .catch((err) => console.log(`Error.....: ${err}`));
+  }, [loggedIn]);
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
@@ -82,7 +84,7 @@ const App = () => {
         })
         .catch((err) => console.log(`Error.....: ${err}`));
     }
-  }, []);
+  }, [loggedIn]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
