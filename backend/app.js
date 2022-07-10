@@ -11,12 +11,12 @@ mongoose.connect('mongodb://localhost:27017/aroundb', {
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 
 // app.use(express.json());
 app.use(bodyParser.json());
 
 require('dotenv').config();
-// console.log(process.env);
 
 const { PORT = 3000 } = process.env;
 
@@ -33,8 +33,16 @@ const {
 
 const serverErrorHandler = require('./middlewares/server-error-handler');
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // in 15 minutes
+  max: 100, // you can make a maximum of 100 requests from one IP
+});
+
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
+
+// applying the rate-limiter
+app.use(limiter);
 
 app.use(helmet());
 
