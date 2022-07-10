@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // const { validateUrl } = require("../middlewares/validations");
 
 // const urlValidator = require('../utils/urlValidator');
@@ -17,18 +17,18 @@ const cardSchema = new mongoose.Schema({
       validator(v) {
         return /^(http:\/\/|https:\/\/)+[?\www]+[^\s]+[\w]?.$/gm.test(v);
       },
-      message: "Invalid URL",
+      message: 'Invalid URL',
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: 'user',
     required: true,
   },
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: 'user',
       default: [],
     },
   ],
@@ -38,4 +38,4 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("card", cardSchema);
+module.exports = mongoose.model('card', cardSchema);
