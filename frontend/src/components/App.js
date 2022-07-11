@@ -84,7 +84,7 @@ const App = () => {
         })
         .catch((err) => console.log(`Error.....: ${err}`));
     }
-  }, [loggedIn]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
