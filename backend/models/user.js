@@ -4,9 +4,7 @@ const bcrypt = require('bcryptjs');
 
 // const urlValidator = require("../utils/urlValidator");
 
-// const { validateUrl, validateEmail } = require("../middlewares/validations");
-
-const { validateEmail } = require('../middlewares/validations');
+const { validateUrl, validateEmail } = require('../middlewares/validations');
 
 const UnauthorizedError = require('../errors/unauthorized-error');
 
@@ -26,9 +24,7 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     validate: {
-      validator(v) {
-        return /^(http:\/\/|https:\/\/)+[?\www]+[^\s]+[\w]?.$/gm.test(v);
-      },
+      validator: validateUrl,
       message: 'Invalid URL',
     },
     default: 'https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg',
@@ -75,3 +71,15 @@ userSchema.statics.findUserByCrendentials = function findUserByCrendentials(
 };
 
 module.exports = mongoose.model('user', userSchema);
+
+
+// avatar: {
+//   type: String,
+//   validate: {
+//     validator(v) {
+//       return /^(http:\/\/|https:\/\/)+[?\www]+[^\s]+[\w]?.$/gm.test(v);
+//     },
+//     message: 'Invalid URL',
+//   },
+//   default: 'https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg',
+// },
