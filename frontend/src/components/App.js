@@ -227,7 +227,11 @@ const App = () => {
           return data;
         }
       })
-      .catch((err) => console.log(`Error.....: ${err}`))
+      .catch((err) => {
+        console.log(`Error.....: ${err}`);
+        setIsSuccess(false);
+        setIsInfoTooltipOpen(true);
+      })
       .finally(() => {
         setIsDataLoading(false);
       });

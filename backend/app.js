@@ -41,6 +41,8 @@ const limiter = rateLimit({
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 
+app.use(requestLogger);
+
 // applying the rate-limiter
 app.use(limiter);
 
@@ -51,8 +53,6 @@ app.use(helmet());
 
 app.use(cors());
 app.options('*', cors());
-
-app.use(requestLogger);
 
 // server crash testing
 app.get('/crash-test', () => {

@@ -1,7 +1,7 @@
 .form__submit-disable {
-    opacity: o.8;
+    opacity: o.2;
     pointer-events: none;
     border: rgba(255, 255, 255, 1);
-    color: black;
+    color: rgb(168, 165, 165);
     background-color: white;
 }
