@@ -59,7 +59,7 @@ An interactive website where users can upload, and share photos from their advan
 
 **API**
 
-- This project has been built to interact with serr data.
+- This project has been built to interact with server data.
 
 **Product Specification Document**
 
