@@ -6,6 +6,8 @@
 
 - The [frontend](https://github.com/nitzanye/react-around-api-full/tree/main/frontend) React Application which uses this API
 
+![aroundwebapp](https://user-images.githubusercontent.com/93406243/187096884-5fb92934-537f-4a51-a71f-a3f19f485e97.gif)
+
 ## Features 
 
 - Register or login to create an account and post photo from your favorite sources
