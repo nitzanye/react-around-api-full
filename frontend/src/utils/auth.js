@@ -1,6 +1,6 @@
 const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://nitzan-smulevici.art'
+    ? 'https://api.around-nitzan.students.nomoredomainssbs.ru'
     : 'http://localhost:3000';
 
 const handleResponse = (res) =>
