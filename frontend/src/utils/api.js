@@ -85,8 +85,13 @@ class Api {
 
 const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'https://api.around-nitzan.students.nomoredomainssbs.ru'
+    ? 'https://nitzan-smulevici.art'
     : 'http://localhost:3000';
+
+// const BASE_URL =
+//   process.env.NODE_ENV === 'production'
+//     ? 'https://api.around-nitzan.students.nomoredomainssbs.ru'
+//     : 'http://localhost:3000';
 
 export default new Api({
   baseUrl: BASE_URL,
