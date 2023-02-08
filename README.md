@@ -22,4 +22,4 @@
 - **Mongoose** wraps MongoDB and manages data with a REST Api
 - **JWT's** secure the authentication process
 
-[Check out this project live here](https://www.around-nitzan.students.nomoredomainssbs.ru/)
+[Check out this project live here](https://around-vercel-frontend.vercel.app/)
